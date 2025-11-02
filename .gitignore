@@ -1,0 +1,7 @@
+__pycache__/
+venv/
+.env
+*.swp
+*.swo
+*~
+*.log
