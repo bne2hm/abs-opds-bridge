@@ -25,3 +25,25 @@ def add_nav_entry(feed, title: str, href: str):
     link.set("type", "application/atom+xml;profile=opds-catalog;kind=acquisition")
     link.set("href", href)
     return entry
+
+def add_search_link(feed, search_url: str):
+    """Add OpenSearch link to feed"""
+    link = etree.SubElement(feed, "link")
+    link.set("rel", "search")
+    link.set("href", search_url)
+    link.set("type", "application/opensearchdescription+xml")
+
+def add_search_entry(feed, search_desc_url: str):
+    """Add search entry to navigation feed"""
+    entry = etree.SubElement(feed, "entry")
+    etree.SubElement(entry, "id").text = "search"
+    etree.SubElement(entry, "title").text = "Search"
+    etree.SubElement(entry, "updated").text = dt.datetime.utcnow().isoformat() + "Z"
+    etree.SubElement(entry, "content").text = "Search books in the catalog"
+
+    # Link to OpenSearch description
+    link = etree.SubElement(entry, "link")
+    link.set("rel", "search")
+    link.set("href", search_desc_url)
+    link.set("type", "application/opensearchdescription+xml")
+    return entry

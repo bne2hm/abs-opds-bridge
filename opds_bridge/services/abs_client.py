@@ -87,4 +87,4 @@ def item_details(item_id: str) -> dict:
 
 def search_items(lib_id: str, q: str) -> list[dict]:
     data = get_json(f"/api/libraries/{lib_id}/search", params={"q": q})
-    return data.get("items") or data.get("results") or []
+    return _extract_list(data)
